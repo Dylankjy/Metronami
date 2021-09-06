@@ -1,0 +1,1 @@
+This folder contains userdata. Should be empty during fresh install.

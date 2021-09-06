@@ -76,4 +76,4 @@ typings/
 .fusebox/
 
 # User data
-.sqlite
+*.sqlite
