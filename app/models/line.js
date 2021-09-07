@@ -1,6 +1,3 @@
-// UUID & Hashing
-const uuid = require('uuid')
-
 const { Model } = require('sequelize')
 module.exports = (sequelize, DataTypes) => {
     class Line extends Model {}
@@ -11,7 +8,6 @@ module.exports = (sequelize, DataTypes) => {
                 allowNull: false,
                 primaryKey: true,
                 type: DataTypes.UUID,
-                defaultValue: uuid.v4(),
             },
             type: {
                 allowNull: false,
