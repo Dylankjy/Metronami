@@ -1,0 +1,63 @@
+<section class="section">
+    <div class="container">
+        <h1 class="title">Networks</h1>
+        <form method="POST">
+            <div class="field">
+                <label class="label">Name</label>
+                <div class="control">
+                    <input class="input" type="text" name="name">
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Alternative Name</label>
+                <div class="control">
+                    <input class="input" type="text" name="altName">
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Type</label>
+                <div class="control">
+                    <input class="input" type="text" name="type">
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Description</label>
+                <div class="control">
+                    <input class="input" type="text" name="desc">
+                </div>
+            </div>
+            <button class="button is-primary">+ Add</button>
+        </form>
+    </div>
+</section>
+
+<section class="section is-light">
+    <div class="container">
+        <b>Current Networks in Database</b>
+        <table class="table is-fullwidth">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Alt Name</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each data.networks}}
+                <tr>
+                    <td>{{name}}</td>
+                    <td>{{alt_name}}</td>
+                    <td>{{type}}</td>
+                    <td>{{description}}</td>
+                    <td>
+                        <a href="/manage/network/{{id}}">Edit</a>
+                        <a href="/manage/network/{{id}}/delete">Delete</a>
+                    </td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+</section>
