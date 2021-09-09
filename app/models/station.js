@@ -9,6 +9,11 @@ module.exports = (sequelize, DataTypes) => {
                 primaryKey: true,
                 type: DataTypes.UUID,
             },
+            station_code: {
+                allowNull: false,
+                primaryKey: true,
+                type: DataTypes.STRING,
+            },
             type: {
                 allowNull: false,
                 type: DataTypes.STRING,
