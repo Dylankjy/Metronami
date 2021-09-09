@@ -1,0 +1,37 @@
+<aside data-turbolinks-permanent class="column is-2">
+    <nav data-turbolinks-permanent class="menu">
+        <p>
+            <span class="has-text-weight-bold is-size-5 has-text-black">
+            {{data.currentNetwork.name}}
+            </span>
+            <br>
+            <span class="is-size-6 has-text-grey">
+                {{data.currentNetwork.alt_name}}
+            </span>
+        </p>
+        <p class="menu-label">
+            Network Info
+        </p>
+        <ul class="menu-list">
+            <li><a href="/manage/network/{{data.currentNetwork.id}}" {{#ifEquals nav "home" }}class="is-active"
+                    {{/ifEquals}}><i class="fas fa-book"></i>&ensp;Overview</a></li>
+            {{!-- <li><a href="./settings" {{#ifEquals meta.sidebarActive "apikeys" }}class="is-active" {{/ifEquals}}><i
+                        class="fas fa-cogs"></i>&ensp;Settings</a></li> --}}
+        </ul>
+        <p class="menu-label">
+            Contents
+        </p>
+        <ul class="menu-list">
+            <li><a href="/manage/network/{{data.currentNetwork.id}}/lines" {{#ifEquals nav "lines" }}class="is-active"
+                    {{/ifEquals}}><i class="fas fa-bus-alt"></i>&ensp;Lines</a></li>
+            <li><a href="/manage/network/{{data.currentNetwork.id}}/stations" {{#ifEquals nav "stations"
+                    }}class="is-active" {{/ifEquals}}><i class="fas fa-dot-circle"></i>&ensp;Stations</a></li>
+        </ul>
+        {{!-- <p class="menu-label">
+            Settings
+        </p>
+        <ul class="menu-list">
+
+        </ul> --}}
+    </nav>
+</aside>

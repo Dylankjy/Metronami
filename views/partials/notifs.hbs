@@ -1,0 +1,12 @@
+{{#if notification}}
+<div class="block" id="notif">
+    <div class="notification is-dark">
+        {{notification}}
+    </div>
+</div>
+<script>
+    setTimeout(() => {
+        $('#notif').slideUp()
+    }, 5000)
+</script>
+{{/if}}

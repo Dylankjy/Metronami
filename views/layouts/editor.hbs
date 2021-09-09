@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    {{!-- <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="turbolinks-cache-control" content="no-cache"> --}}
+
+    <title>{{meta.title}} - Metronami Editor</title>
+
+    <!-- Third-party libraries -->
+    <script src="/third_party/jquery/jquery.min.js"></script>
+
+
+    <link rel="stylesheet" href="/third_party/bulma/bulma.min.css">
+    <script defer src="/js/navbar.js"></script>
+
+    <link href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" rel="stylesheet">
+</head>
+
+<body>
+    {{>editor/navbar}}
+    <div class="section">
+        <div class="container">
+            <div class="columns">
+                {{>editor/sidebar}}
+
+                <main class="column ml-4">
+                    {{{body}}}
+                    {{!-- {{>footer}} --}}
+                </main>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

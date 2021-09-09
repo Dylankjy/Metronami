@@ -1,0 +1,45 @@
+<nav data-turbolinks-permanent class="navbar is-black has-shadow" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="/manage/network/{{data.currentNetwork.id}}">
+                <b>Metronami</b>&nbsp;Editor
+            </a>
+            <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+
+        <div class="navbar-menu pl-3">
+            <div class="navbar-start">
+                {{!-- <div class="navbar-item">
+                    {{data.currentNetwork.name}}
+                </div> --}}
+                {{!-- <div class="navbar-item has-dropdown is-hoverable has-background-dark">
+                    <div class="navbar-item">
+                        <div class="profile-img"
+                            style="background-image: url('/static/users/{{ data.currentUser.profile_img }}')"></div>
+                    </div>
+
+                    <div class="navbar-dropdown is-boxed is-glass-white">
+                        <div class="has-background-light p-4 mb-2 has-text-black">
+                            <p class="has-text-weight-bold">Logged in as</p>
+                            <p>{{ data.currentUser.name }}</p>
+                        </div>
+                        <hr class="navbar-divider">
+                        <a href="/id/logout" class="navbar-item has-text-danger-dark">
+                            <i class="fas fa-sign-out-alt"></i>&ensp;Sign out
+                        </a>
+                    </div>
+                </div> --}}
+            </div>
+            <div class="navbar-end">
+                <a class="navbar-item has-text-danger-dark" href="/manage">
+                    <i class="fas fa-times"></i>&ensp;
+                    Save &amp; Exit
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
