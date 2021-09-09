@@ -5,10 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>{{meta.title}} - TanukiWorks Toriimon</title>
-    <!-- First-party libraries -->
-    <link rel="stylesheet" href="/css/app.css">
-    <script src="/js/app.js"></script>
+    <title>{{title}} - Metronami</title>
 
     <!-- Bulma Framework -->
     <link rel="stylesheet" href="/third_party/bulma/bulma.min.css">
@@ -16,24 +13,12 @@
     <!-- Third-party libraries -->
     <script src="/third_party/jquery/jquery.min.js"></script>
     <link href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" rel="stylesheet">
-
-    <script src="/third_party/turbolinks/turbolinks.js"></script>
-    <script>
-        Turbolinks.start()
-
-        $(document).on('turbolinks:before-cache turbolinks:before-render', function () {
-            return $('main').fadeOut('fast');
-        });
-        $(document).on('turbolinks:load', function () {
-            return $('main').fadeIn('fast');
-        });
-    </script>
 </head>
 
 <body>
     {{>navbar}}
 
-    <main style="display: none;">
+    <main>
         {{{body}}}
     </main>
 
