@@ -9,7 +9,7 @@ const db = {}
 
 const sequelize = new Sequelize({
     dialect: 'sqlite',
-    storage: './data/metronami_userdata.sqlite',
+    storage: './data/metronami_userdata.ptn',
 })
 
 fs
