@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/hiyamashu/Metronami#readme",
   "dependencies": {
+    "cookie-parser": "^1.4.5",
     "dateformat": "^4.5.1",
     "express": "^4.17.1",
     "express-formidable": "^1.2.0",

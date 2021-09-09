@@ -1,6 +1,3 @@
-// Config
-const config = require('../config/config.json')
-
 // TODO: Enable secure cookie after testing
 
 // cookieParser: Cookie schema
@@ -8,7 +5,7 @@ const StdCookie = {
     httpOnly: true,
     // secure: true,
     signed: true,
-    domain: `${config.webserver.cookieDomain}`,
+    domain: `localhost:3000`,
     maxAge: 2678400000, // 31 days
     path: '/',
 }
@@ -18,7 +15,7 @@ const ToriimonCookie = {
     httpOnly: true,
     // secure: true,
     signed: true,
-    domain: `${config.webserver.cookieDomain}`,
+    domain: `localhost:3000`,
     maxAge: 2678400000, // 31 days
     path: '/',
 }
@@ -28,8 +25,8 @@ const ToriimonCookie = {
 const NotificationCookie = {
     httpOnly: true,
     // secure: true,
-    signed: true,
-    domain: `${config.webserver.cookieDomain}`,
+    // signed: true,
+    domain: `localhost`,
     maxAge: 5000, // 5 seconds
     path: '/',
 }

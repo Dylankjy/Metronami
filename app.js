@@ -7,6 +7,10 @@ app.use('/third_party', express.static('third_party'))
 // BodyParser
 app.use(express.urlencoded({ extended: true }))
 
+
+const cookieParser = require('cookie-parser')
+app.use(cookieParser())
+
 // Handlebars
 const exphbs = require('express-handlebars')
 app.set('views', [`views`])
