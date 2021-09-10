@@ -75,6 +75,9 @@ typings/
 # FuseBox cache
 .fusebox/
 
+# Releases
+dist/
+
 # User data
 *.sqlite
 *.ptn
