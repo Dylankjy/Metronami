@@ -15,6 +15,15 @@ module.exports = {
             return options.inverse(this)
         }
     },
+    select(value, options) {
+        return options.fn(this)
+            .split('\n')
+            .map((v) => {
+                const t = 'value="' + value + '"'
+                return ! RegExp(t).test(v) ? v : v.replace(t, t + ' selected="selected"')
+            })
+            .join('\n')
+    },
     parseISODateTime: (value) => {
         return dateFormat(value, 'dS mmmm yyyy, HH:MM:ss')
     },
