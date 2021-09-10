@@ -23,6 +23,7 @@ module.exports = (sequelize, DataTypes) => {
                 type: DataTypes.STRING,
             },
             alt_name: {
+            connections: {
                 allowNull: false,
                 type: DataTypes.STRING,
             },
