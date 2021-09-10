@@ -2,6 +2,5 @@
 
 module.exports = (app) => {
     app.use('/', require('./index'))
-    app.use('/ui_less/manage', require('./ui_less_manage'))
     app.use('/manage', require('./manage'))
 }
