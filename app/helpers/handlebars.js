@@ -15,14 +15,19 @@ module.exports = {
             return options.inverse(this)
         }
     },
-    select(value, options) {
-        return options.fn(this)
-            .split('\n')
-            .map((v) => {
-                const t = 'value="' + value + '"'
-                return ! RegExp(t).test(v) ? v : v.replace(t, t + ' selected="selected"')
-            })
-            .join('\n')
+    select(selected, options) {
+        let html = options.fn(this)
+
+        if (selected) {
+            const values = selected.split(',')
+            const length = values.length
+
+            for (let i = 0; i < length; i++) {
+                html = html.replace( new RegExp(' value=\"' + values[i] + '\"'), '$& selected="selected"')
+            }
+        }
+
+        return html
     },
     parseISODateTime: (value) => {
         return dateFormat(value, 'dS mmmm yyyy, HH:MM:ss')
