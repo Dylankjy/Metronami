@@ -1,12 +1,13 @@
 {
   "name": "metronami",
-  "version": "0.0.1",
+  "version": "0.0.1-beta",
   "description": "An open source Public Transport network manager for roleplay and fantasy worlds",
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
     "test": "eslint . --ext .js,.jsx,.ts,.tsx",
     "lint-fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
+    "build": "pkg .",
     "watch": "nodemon app.js"
   },
   "repository": {
@@ -25,11 +26,17 @@
   },
   "homepage": "https://github.com/hiyamashu/Metronami#readme",
   "dependencies": {
+    "chalk": "^4.1.2",
     "cookie-parser": "^1.4.5",
     "dateformat": "^4.5.1",
+    "download": "^8.0.0",
     "express": "^4.17.1",
     "express-formidable": "^1.2.0",
     "express-handlebars": "^5.3.3",
+    "get-github-tag": "^1.1.0",
+    "moment": "^2.29.1",
+    "open": "^8.2.1",
+    "semver": "^7.3.5",
     "sequelize": "^6.6.5",
     "sqlite3": "^4.2.0",
     "uuid": "^8.3.2"
@@ -38,5 +45,15 @@
     "eslint": "^7.32.0",
     "eslint-config-google": "^0.14.0",
     "nodemon": "^2.0.12"
+  },
+  "bin": "app.js",
+  "pkg": {
+    "assets": [
+      "third_party/*/**",
+      "views/*/**",
+      "public/*/**",
+      "app/*/**"
+    ],
+    "outputPath": "dist"
   }
 }

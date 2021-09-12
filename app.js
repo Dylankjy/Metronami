@@ -1,3 +1,6 @@
+// Boot
+const boot = require('./app/boot/boot')
+
 // Express
 const express = require('express')
 const app = express()
@@ -27,6 +30,8 @@ require('./app/routes/routes')(app)
 
 // Open in browser
 const open = require('open')
+const chalk = require('chalk')
+
 const webserverPort = 3000
 
 const webserver = () => {
@@ -46,6 +51,8 @@ const webserver = () => {
 }
 
 // Load SQLize models
-require('./app/models').sequelize.sync().then(() => {
-    webserver()
+boot().then(() => {
+    require('./app/models').sequelize.sync().then(() => {
+        webserver()
+    })
 })
