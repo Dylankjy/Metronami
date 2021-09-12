@@ -1,0 +1,97 @@
+<section class="block">
+    <div class="container">
+        <h1 class="title">Lines</h1>
+        <p class="subtitle">List of lines on the {{data.currentNetwork.name}} network</p>
+    </div>
+</section>
+
+<section class="block">
+    <div class="container">
+        {{>notifs}}
+
+        <a class="button is-success" onclick="$('#modal-CreateLine').fadeIn('fast')"><i
+                class="fas fa-plus"></i>&ensp;New Line</a>
+        <hr>
+
+        {{#if data.lines}}
+        {{#each data.lines}}
+        <a class="box p-5" style="border-top: 6px {{this.color}} solid" href="/manage/network/{{@root.data.currentNetwork.id}}/lines/{{this.id}}">
+            <h2 class="title is-4">
+                {{#ifEquals this.type 'Rail'}}
+                {{!-- <i class="fas fa-subway"></i> --}}
+                🚇
+                {{/ifEquals}}
+                {{#ifEquals this.type 'Bus'}}
+                {{!-- <i class="fas fa-bus-alt"></i> --}}
+                🚍
+                {{/ifEquals}}
+                {{#ifEquals this.type 'Ferry'}}
+                {{!-- <i class="fas fa-ship"></i> --}}
+                ⛴️
+                {{/ifEquals}}
+                {{#ifEquals this.type 'Tramway'}}
+                {{!-- <i class="fas fa-shuttle-van"></i> --}}
+                🚋
+                {{/ifEquals}}
+
+                {{this.name}}
+            </h2>
+            <p class="subtitle is-6">{{this.alt_name}}</p>
+        </a>
+        {{/each}}
+        {{else}}
+        <p class="has-text-centered has-text-grey is-size-5"><i class="fas fa-times"></i>&ensp;This network has no lines</p>
+        {{/if}}
+    </div>
+</section>
+
+<div class="modal is-active" id="modal-CreateLine" style="display: none;">
+    <div class="modal-background"></div>
+    <div class="modal-content">
+        <div class="box p-6">
+            <h1 class="title is-3">Create Line</h1>
+            <form method="POST" autocomplete="off">
+                <div class="field">
+                    <label class="label">Name</label>
+                    <div class="control">
+                        <input class="input" type="text" name="name" placeholder="Central Main Line" required>
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Alternative Name (optional)</label>
+                    <div class="control">
+                        <input class="input" type="text" name="altName" placeholder="中央本線">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Line Colour</label>
+                    <div class="control">
+                        <input class="input" type="color" name="lineColor" value="041e47">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Type</label>
+                    <div class="control">
+                        <div class="select is-fullwidth">
+                            <select name="type">
+                                <option value="Bus">Bus</option>
+                                <option value="Tramway">Tramway</option>
+                                <option value="Ferry">Ferry</option>
+                                <option value="Rail">Rail</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Description (optional)</label>
+                    <div class="control">
+                        <textarea class="textarea" name="desc" rows="5"
+                            placeholder="Nakato Metro is a subway network that..."></textarea>
+                    </div>
+                </div>
+                <button class="button is-dark"><i class="fas fa-arrow-right"></i>&ensp;Continue</button>
+            </form>
+        </div>
+    </div>
+    <button class="modal-close is-large" aria-label="close" onclick="$('#modal-CreateLine').fadeOut('fast')"></button>
+</div>

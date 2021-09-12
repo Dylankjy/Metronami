@@ -1,0 +1,52 @@
+<section class="block">
+    <div class="container">
+        <a href="../stations"><small><i class="fas fa-arrow-left"></i>&ensp;Back</small></a><br><br>
+        <h1 class="title">Edit Connection</h1>
+        <p class="subtitle">Add &amp; remove lines from this connection</p>
+        {{>notifs}}
+        <form method="POST" autocomplete="off">
+            <div class="field">
+                <label class="label">Connection ID</label>
+                <div class="control">
+                    <input class="input" type="text" value="{{data.currentConnection.id}}" readonly>
+                </div>
+                <small class="has-text-grey">Since connections do not have names, this ID helps you identify connections
+                    correctly.</small>
+            </div>
+            <hr>
+            <h3 class="title is-4">Stations linked by this connection</h3>
+            <div class="block">
+                <label class="label">Enter Station Code</label>
+                <div class="field has-addons has-addons-fullwidth mb-5">
+                    <div class="control">
+                        <input name="stationCodes" class="input" type="text" placeholder="A1, B3, C9">
+                    </div>
+                    <div class="control">
+                        <button class="button is-dark">
+                            <i class="fas fa-plus"></i>&ensp; Add station
+                        </button>
+                    </div>
+                </div>
+                {{#each data.connectionStation}}
+                <div class="box p-5" style="border-left: 6px solid {{this.[Line.color]}}">
+                    <div class="columns is-vcentered">
+                        <div class="column">
+                            <h2 class="title is-4">
+                                <span class="tag mb-1"
+                                    style="background-color: {{this.[Line.color]}}; color: white">{{this.station_code}}</span>
+                                <a
+                                    href="/manage/network/{{@root.data.currentNetwork.id}}/stations/{{this.id}}">{{this.name}}</a>
+                            </h2>
+                            <p class="subtitle is-6">{{this.alt_name}}</p>
+                        </div>
+                        <div class="column has-text-right is-one-fifth">
+                            <button value="{{this.id}}" type="submit" name="removeAction"
+                                class="button is-white has-text-danger-dark"><i
+                                    class="fas fa-times"></i>&ensp;Remove</button>
+                        </div>
+                    </div>
+                </div>
+                {{/each}}
+        </form>
+    </div>
+</section>

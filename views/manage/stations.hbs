@@ -1,0 +1,138 @@
+<section class="block">
+    <div class="container">
+        <h1 class="title">Stations</h1>
+        <p class="subtitle">List of stations on the {{data.currentNetwork.name}} network</p>
+    </div>
+</section>
+
+<section class="block">
+    <div class="container">
+        {{>notifs}}
+
+        <div class="columns">
+            <div class="column">
+                <a class="button is-success" onclick="$('#modal-CreateStation').fadeIn('fast')"><i
+                        class="fas fa-plus"></i>&ensp;New Station</a>
+                <a class="button is-success" onclick="$('#modal-CreateConnection').fadeIn('fast')"><i
+                        class="fas fa-plus"></i>&ensp;New Connection</a>
+            </div>
+            <div class="column">
+                <form action="/api/search">
+                    <div class="field has-addons has-addons-right">
+                        <div class="control">
+                            <input class="input" type="text" placeholder="Station Code/Name">
+                        </div>
+                        <div class="control">
+                            <a class="button is-dark">
+                                Filter
+                            </a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <hr>
+
+        {{#if data.stations}}
+        {{#each data.stations}}
+        <div class="box p-5" style="border-left: 6px solid {{this.[Line.color]}}">
+            <h2 class="title is-4">
+                <div class="tags has-addons" style="margin-bottom: 0.1rem;">
+                    <span class="tag"
+                        style="background-color: {{this.[Line.color]}}; color: white">{{this.station_code}}</span>
+                    {{#if this.[Connection.id]}}
+                    <a class="tag is-light"
+                        href="/manage/network/{{@root.data.currentNetwork.id}}/connections/{{this.connection_id}}"><i
+                            class="fas fa-link"></i></a>
+                    {{/if}}
+                </div>
+                <a href="/manage/network/{{@root.data.currentNetwork.id}}/stations/{{this.id}}">{{this.name}}</a>
+            </h2>
+            <p class="subtitle is-6">{{this.alt_name}}</p>
+        </div>
+        {{/each}}
+        {{else}}
+        <p class="has-text-centered has-text-grey is-size-5"><i class="fas fa-times"></i>&ensp;This network has no
+            stations</p>
+        {{/if}}
+    </div>
+</section>
+
+<div class="modal is-active" id="modal-CreateStation" style="display: none;">
+    <div class="modal-background"></div>
+    <div class="modal-content">
+        <div class="box p-6">
+            <h1 class="title is-3">Create Station</h1>
+            <form method="POST" autocomplete="off">
+                <div class="field">
+                    <label class="label">Station Code</label>
+                    <div class="control">
+                        <input class="input" type="text" name="stationCode" placeholder="A24" required>
+                        <small class="has-text-grey"><i class="fas fa-info-circle"></i>&ensp;This value must be unique
+                            as it is used to distinctively identify the station.</small>
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Name</label>
+                    <div class="control">
+                        <input class="input" type="text" name="name" placeholder="Tanukikoji" required>
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Alternative Name (optional)</label>
+                    <div class="control">
+                        <input class="input" type="text" name="altName" placeholder="狸小路・タヌキコウジ">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Line</label>
+                    <div class="control">
+                        <div class="select is-fullwidth">
+                            <select name="connection" required>
+                                {{#each data.lines}}
+                                <option value="{{this.id}}">{{this.name}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                        {{!-- <small class="has-text-grey"><i class="fas fa-info-circle"></i>&ensp;Press and hold Ctrl
+                            or
+                            &#8984; to multiselect.</small> --}}
+                    </div>
+                </div>
+                <button class="button is-dark"><i class="fas fa-plus"></i>&ensp;Add</button>
+            </form>
+        </div>
+    </div>
+    <button class="modal-close is-large" aria-label="close"
+        onclick="$('#modal-CreateStation').fadeOut('fast')"></button>
+</div>
+
+<div class="modal is-active" id="modal-CreateConnection" style="display: none">
+    <div class="modal-background"></div>
+    <div class="modal-content">
+        <div class="box p-6">
+            <h1 class="title is-3">Create Connection</h1>
+            <div class="block mb-3">
+                <p><b>What is a connection?</b></p>
+                <p>Metronami will treat listed stations as one singular interchange when a connection is created.</p>
+                <p><b>Wanting to modify a connection?</b></p>
+                <p>This setting is listed in each station's setting page.</p>
+            </div>
+            <form method="POST" autocomplete="off" action="./add_connection">
+                <div class="field">
+                    <label class="label">Station Codes</label>
+                    <div class="control">
+                        <input class="input" type="text" name="stationCodes" value="{{restoreData}}"
+                            placeholder="A1, B3, C9" required>
+                        <small class="has-text-grey"><i class="fas fa-info-circle"></i>&ensp;Type each station code,
+                            followed by a comma. Order is irrelevant.</small>
+                    </div>
+                </div>
+                <br>
+                <button class="button is-dark"><i class="fas fa-link"></i>&ensp;Connect stations</button>
+            </form>
+        </div>
+    </div>
+    <button class="modal-close is-large" aria-label="close"
+        onclick="$('#modal-CreateConnection').fadeOut('fast')"></button>
+</div>

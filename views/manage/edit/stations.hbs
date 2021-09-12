@@ -1,0 +1,49 @@
+<section class="block">
+    <div class="container">
+        <a href="../stations"><small><i class="fas fa-arrow-left"></i>&ensp;Back</small></a><br><br>
+        <h1 class="title">{{data.currentStation.name}}</h1>
+        <p class="subtitle">Edit station properties</p>
+        {{>notifs}}
+            <form method="POST" autocomplete="off">
+                <div class="field">
+                    <label class="label">Station Code</label>
+                    <div class="control">
+                        <input class="input" type="text" name="stationCode" placeholder="{{data.currentStation.station_code}}" value="{{data.currentStation.station_code}}" required>
+                        <small class="has-text-grey"><i class="fas fa-info-circle"></i>&ensp;This value must be unique
+                            as it is used to distinctively identify the station.</small>
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Name</label>
+                    <div class="control">
+                        <input class="input" type="text" name="name" placeholder="{{data.currentStation.name}}" value="{{data.currentStation.name}}" required>
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Alternative Name (optional)</label>
+                    <div class="control">
+                        <input class="input" type="text" name="altName" placeholder="{{data.currentStation.alt_name}}" value="{{data.currentStation.alt_name}}">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Line</label>
+                    <div class="control">
+                        <div class="select is-fullwidth">
+                            <select name="connection" required>
+                                {{#select data.currentStation.line_id}}
+                                {{#each data.lines}}
+                                <option value="{{this.id}}">{{this.name}}</option>
+                                {{/each}}
+                                {{/select}}
+                            </select>
+                        </div>
+                        {{!-- <small class="has-text-grey"><i class="fas fa-info-circle"></i>&ensp;Press and hold Ctrl or &#8984; to multiselect.</small> --}}
+                    </div>
+                </div>
+
+            <button class="button is-dark"><i class="fas fa-save"></i>&ensp;Save &amp; return</button>
+            <a id="button-Delete" class="button is-danger is-light" onclick="$('#button-Delete').hide(0); $('#button-DeleteConfirm').show(0)"><i class="fas fa-trash-alt"></i>&ensp; Delete station</a>
+            <button id="button-DeleteConfirm" class="button is-danger" value="DELETE" name="doAction" style="display: none;"><i class="fas fa-trash-alt"></i>&ensp; Confirm deletion?</button>
+            </form>
+    </div>
+</section>

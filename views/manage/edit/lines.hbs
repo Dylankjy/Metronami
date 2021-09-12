@@ -1,0 +1,63 @@
+<section class="block">
+    <div class="container">
+        <a href="../lines"><small><i class="fas fa-arrow-left"></i>&ensp;Back</small></a><br><br>
+        <h1 class="title">{{data.currentLine.name}}</h1>
+        <p class="subtitle">Edit properties</p>
+        {{>notifs}}
+        <form method="POST" autocomplete="off">
+            <div class="field">
+                <label class="label">Name</label>
+                <div class="control">
+                    <input class="input" type="text" name="name" placeholder="{{data.currentLine.name}}"
+                        value="{{data.currentLine.name}}" required>
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Alternative Name (optional)</label>
+                <div class="control">
+                    <input class="input" type="text" name="altName" placeholder="{{data.currentLine.alt_name}}"
+                        value="{{data.currentLine.alt_name}}">
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Line Colour</label>
+                <div class="control">
+                    <input class="input" type="color" name="lineColor" value="{{data.currentLine.color}}"
+                        value="{{data.currentLine.color}}">
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Type</label>
+                <div class="control">
+                    <div class="select is-fullwidth">
+                        <select name="type">
+                            {{#select data.currentLine.type}}
+                            <option value="Bus">Bus</option>
+                            <option value="Tramway">Tramway</option>
+                            <option value="Ferry">Ferry</option>
+                            <option value="Rail">Rail</option>
+                            {{/select}}
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Description (optional)</label>
+                <div class="control">
+                    <textarea class="textarea" name="desc" rows="5" placeholder="{{data.currentLine.desc}}"
+                        value="{{data.currentLine.desc}}"></textarea>
+                </div>
+            </div>
+            <div class="buttons">
+                <button class="button is-dark"><i class="fas fa-save"></i>&ensp;Save &amp; return</button>
+                <a id="button-Delete" class="button is-danger is-light"
+                    onclick="$('#button-Delete').hide(0); $('#button-DeleteConfirm').show(0)"><i
+                        class="fas fa-trash-alt"></i>&ensp; Delete line</a>
+                <button id="button-DeleteConfirm" class="button is-danger" value="DELETE" name="doAction"
+                    style="display: none;"><i class="fas fa-trash-alt"></i>&ensp; Confirm deletion?</button>
+            </div>
+
+            <small class="has-text-danger-dark"><i class="fas fa-info-circle"></i>&ensp;Deleting a line also deletes all stations associated with it. Please be careful!</small>
+        </form>
+    </div>
+</section>

@@ -39,6 +39,10 @@ module.exports = (sequelize, DataTypes) => {
             onDelete: 'cascade',
             foreignKey: 'network_id',
         })
+        Network.hasMany(models.Connection, {
+            onDelete: 'cascade',
+            foreignKey: 'network_id',
+        })
     }
 
     return Network

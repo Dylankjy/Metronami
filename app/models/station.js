@@ -14,16 +14,11 @@ module.exports = (sequelize, DataTypes) => {
                 primaryKey: true,
                 type: DataTypes.STRING,
             },
-            type: {
-                allowNull: false,
-                type: DataTypes.STRING,
-            },
             name: {
                 allowNull: false,
                 type: DataTypes.STRING,
             },
             alt_name: {
-            connections: {
                 allowNull: false,
                 type: DataTypes.STRING,
             },
@@ -35,6 +30,17 @@ module.exports = (sequelize, DataTypes) => {
             modelName: 'Station',
         },
     )
+
+    Station.associate = (models) => {
+        Station.belongsTo(models.Line, {
+            onDelete: 'cascade',
+            foreignKey: 'line_id',
+        })
+        Station.belongsTo(models.Connection, {
+            onDelete: 'cascade',
+            foreignKey: 'connection_id',
+        })
+    }
 
     return Station
 }

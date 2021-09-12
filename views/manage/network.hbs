@@ -1,0 +1,29 @@
+<section class="block">
+    <div class="container">
+        <h1 class="title">Network Options</h1>
+        <p class="subtitle">Customisation options for {{data.currentNetwork.name}}</p>
+        {{>notifs}}
+        <form method="POST" autocomplete="off">
+            <div class="field">
+                <label class="label">Name</label>
+                <div class="control">
+                    <input class="input" type="text" name="name" placeholder="{{data.currentNetwork.name}}" value="{{data.currentNetwork.name}}" required>
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Alternative Name (optional)</label>
+                <div class="control">
+                    <input class="input" type="text" name="altName" placeholder="{{data.currentNetwork.alt_name}}" value="{{data.currentNetwork.alt_name}}">
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Description (optional)</label>
+                <div class="control">
+                    <textarea class="textarea" name="desc" rows="5"
+                        placeholder="{{data.currentNetwork.description}}" value="{{data.currentNetwork.description}}"></textarea>
+                </div>
+            </div>
+            <button class="button is-dark"><i class="fas fa-save"></i>&ensp;Save</button>
+        </form>
+    </div>
+</section>

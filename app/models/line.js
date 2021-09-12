@@ -39,5 +39,12 @@ module.exports = (sequelize, DataTypes) => {
         },
     )
 
+    Line.associate = (models) => {
+        Line.hasMany(models.Station, {
+            onDelete: 'cascade',
+            foreignKey: 'line_id',
+        })
+    }
+
     return Line
 }
