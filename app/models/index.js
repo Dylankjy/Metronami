@@ -28,15 +28,6 @@ Object.keys(db).forEach((modelName) => {
     }
 })
 
-// This checks whether there is an active MySQL connection on start.
-console.log('\x1b[1m\x1b[2m[DATABASE] - \x1b[1m\x1b[35mPENDING\x1b[0m: Checking connectivity...\x1b[0m')
-sequelize.authenticate().then(() => {
-    console.log('\x1b[1m\x1b[2m[DATABASE] - \x1b[1m\x1b[34mOK\x1b[0m: Connection established successfully.\x1b[0m')
-}).catch(() => {
-    console.log('\x1b[1m\x1b[2m[DATABASE] - \x1b[0m\x1b[1m\x1b[31m\x1b[5mFAILED\x1b[0m\x1b[31m: Connection to MySQL failed.\x1b[0m')
-    process.exit(1)
-})
-
 db.sequelize = sequelize
 db.Sequelize = Sequelize
 
