@@ -34,29 +34,34 @@
         <hr>
 
         {{#if data.stations}}
-        {{#each data.stations}}
-        <div class="box p-5" style="border-left: 6px solid {{this.[Line.color]}}">
-            <h2 class="title is-4">
-                <div class="tags has-addons" style="margin-bottom: 0.1rem;">
-                    <span class="tag"
-                        style="background-color: {{this.[Line.color]}}; color: white">{{this.station_code}}</span>
-                    {{#if this.[Connection.id]}}
-                    <a class="tag is-light"
-                        href="/manage/network/{{@root.data.currentNetwork.id}}/connections/{{this.connection_id}}"><i
-                            class="fas fa-link"></i></a>
+        <div class="columns is-vcentered is-multiline">
+            {{#each data.stations}}
+            <div class="column is-one-third">
+                <div class="box p-5" style="border-left: 6px solid {{this.[Line.color]}}">
+                    <h2 class="title is-4">
+                        <div class="tags has-addons" style="margin-bottom: 0.1rem;">
+                            <span class="tag"
+                                style="background-color: {{this.[Line.color]}}; color: white">{{this.station_code}}</span>
+                            {{#if this.[Connection.id]}}
+                            <a class="tag is-light"
+                                href="/manage/network/{{@root.data.currentNetwork.id}}/connections/{{this.connection_id}}"><i
+                                    class="fas fa-link"></i></a>
+                            {{/if}}
+                        </div>
+                        <a
+                            href="/manage/network/{{@root.data.currentNetwork.id}}/stations/{{this.id}}">{{this.name}}</a>
+                    </h2>
+                    {{#if this.alt_name}}
+                    <p class="subtitle is-6">{{this.alt_name}}</p>
                     {{/if}}
                 </div>
-                <a href="/manage/network/{{@root.data.currentNetwork.id}}/stations/{{this.id}}">{{this.name}}</a>
-            </h2>
-            {{#if this.alt_name}}
-            <p class="subtitle is-6">{{this.alt_name}}</p>
+            </div>
+            {{/each}}
+            {{else}}
+            <p class="has-text-centered has-text-grey is-size-5"><i class="fas fa-times"></i>&ensp;This network has no
+                stations</p>
             {{/if}}
         </div>
-        {{/each}}
-        {{else}}
-        <p class="has-text-centered has-text-grey is-size-5"><i class="fas fa-times"></i>&ensp;This network has no
-            stations</p>
-        {{/if}}
     </div>
 </section>
 
