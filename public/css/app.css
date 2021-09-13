@@ -10,6 +10,11 @@
     background-color: rgba(0, 0, 0, 0.6);
     backdrop-filter: saturate(180%) blur(20px);
 }
+
+.box {
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
 .list-Networks {
     height: 23rem;
     overflow-x: auto;
@@ -22,6 +27,7 @@
     height: 20rem;
     border-radius: 6px;
     flex-shrink: 0;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
 .line-dot {
