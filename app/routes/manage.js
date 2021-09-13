@@ -164,7 +164,7 @@ router.post('/network/:networkID/lines/:lineID', async (req, res) => {
     const { name, altName, lineColor, type, desc, doAction } = req.body
 
     // Delete Line
-    // using both ID and network_id to ensure that correct station gets deleted even in the event of uuid collision
+    // using both ID and network_id to ensure that correct line gets deleted even in the event of uuid collision
     if (doAction === 'DELETE') {
         await Line.destroy({
             where: {
@@ -282,7 +282,21 @@ router.get('/network/:networkID/stations/:stationID', async (req, res) => {
 
 router.post('/network/:networkID/stations/:stationID', async (req, res) => {
     const { networkID, stationID } = req.params
-    const { stationCode, name, altName, connection } = req.body
+    const { stationCode, name, altName, connection, doAction } = req.body
+
+    // Delete station
+    // using both ID and network_id to ensure that correct station gets deleted even in the event of uuid collision
+    if (doAction === 'DELETE') {
+        await Station.destroy({
+            where: {
+                id: stationID,
+                network_id: networkID,
+            },
+        })
+
+        res.cookie('notification', `${name} has been deleted.`, NotificationCookie)
+        return res.redirect(`/manage/network/${networkID}/stations`)
+    }
 
     await Station.update({
         station_code: stationCode,
