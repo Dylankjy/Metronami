@@ -7,22 +7,6 @@ const { Network, Line, Station, Connection } = require('../models')
 const { NotificationCookie, FormRestoreCookie } = require('../helpers/cookie_options')
 const { Op } = require('sequelize')
 
-// GET /manage/networks - List all networks
-router.get('/', async (req, res) => {
-    const { notification } = req.cookies
-
-    const NetworkList = await Network.findAll({ raw: true })
-
-    const data = {
-        title: 'Manage Networks',
-        data: {
-            networks: NetworkList,
-        },
-        notification: notification || false,
-    }
-    return res.render('manage/index', data)
-})
-
 router.post('/add_network', async (req, res) => {
     const { name, altName, desc } = req.body
 
@@ -34,7 +18,7 @@ router.post('/add_network', async (req, res) => {
     })
 
     res.cookie('notification', `${name} has been created.`, NotificationCookie)
-    return res.redirect('/manage')
+    return res.redirect('back')
 })
 
 // GET /manage/networks/:id - List network details
@@ -207,8 +191,6 @@ router.get('/network/:networkID/stations', async (req, res) => {
 
     const Lines = await Line.findAll({ where: { network_id: networkID }, raw: true })
     const Stations = await Station.findAll({ where: { network_id: networkID }, include: [{ model: Line, attributes: ['color'] }, { model: Connection }], raw: true })
-
-    console.log(Stations)
 
     const data = {
         title: 'Manage Lines for ' + CurrentNetwork.name,

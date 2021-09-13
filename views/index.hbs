@@ -1,56 +1,141 @@
-<style>
-    html {
-        height: 100%;
-        background-color: #f5f5f5;
-    }
-
-    .menu-image {
-        height: 8rem;
-    }
-</style>
+<section class="hero is-white">
+    <div class="hero-body">
+        <div class="container">
+            <p class="title is-2 mt-6">
+                Welcome to Metronami
+            </p>
+            <p class="subtitle is-5">
+                Open source public transit manager &amp; map generator
+            </p>
+        </div>
+    </div>
+</section>
 
 <section class="section">
     <div class="container">
-        <div class="block has-text-centered">
-            <h1 class="title is-1">Metronami</h1>
-            <p class="subtitle">Fantasy world public transport manager</p>
-        </div>
         <div class="columns">
             <div class="column">
-                <a class="box p-0" href="/maps">
-                    <div class="p-6">
-                        <h2 class="title is-3">Maps</h2>
-                        <p class="subtitle">View maps generated from your network</p>
-                    </div>
-                    <div class="has-text-right">
-                        <img class="menu-image" src="/static/maps.png">
-                    </div>
-                </a>
+                <h2 class="title is-4">Your networks</h2>
+                <p class="subtitle is-6">Tip: Hold down shift to scroll through the list of networks</p>
             </div>
-            <div class="column">
-                <a class="box p-0" href="/manage">
-                    <div class="p-6">
-                        <h2 class="title is-3">Manage Network</h2>
-                        <p class="subtitle">Create &amp; edit your transport network.</p>
-                    </div>
-                    <div class="has-text-right">
-                        <img class="menu-image" src="/static/manage.png">
-                    </div>
-                </a>
+            <div class="column has-text-right">
+                <a class="button is-success" onclick="$('#modal-CreateNetwork').fadeIn('fast')"><i
+                        class="fas fa-plus"></i>&ensp;New Network</a>
             </div>
         </div>
-        {{!-- <a class="box p-0">
-            <div class="p-6">
-                <h2 class="title is-3">Application Settings</h2>
-                <p class="subtitle">Modify Metronami settings &amp; user preferences.</p>
-            </div>
-        </a> --}}
+        <div class="list-Networks">
+            {{#each data.networks}}
+            <a class="list-item p-5 mr-3 has-background-black" href="/manage/network/{{this.dataValues.id}}">
+                <h4 class="title is-5 has-text-white text-NoOverflow">{{this.dataValues.name}}</h4>
+                {{#if this.dataValues.alt_name}}
+                <p class="subtitle is-6 has-text-grey-light text-NoOverflow">{{this.dataValues.alt_name}}</p>
+                {{else}}
+                <p class="subtitle is-6 has-text-grey-light text-NoOverflow">&ensp;</p>
+                {{/if}}
+                <div>
+                    <p class="has-text-grey">{{lengthOfList this.dataValues.Lines}} lines &bull; {{lengthOfList
+                        this.dataValues.Stations}} stations</p>
+                </div>
+                <div class="mt-4">
+                    {{#each this.dataValues.Lines}}
+                    <div class="line-dot" style="background: {{this.dataValues.color}};"></div>
+                    {{/each}}
+                </div>
+            </a>
+            {{/each}}
+        </div>
     </div>
 </section>
 <section class="section">
     <div class="container">
-        <div class="block has-text-centered">
-            Copyright &copy; 2021, <a href="https://github.com/hiyamashu/Metronami" target="_blank">Dylan Kok</a>
-        </div>
+        <span class="buttons is-centered">
+            {{!-- <button class="button is-circular is-large ml-2 mr-2">
+                <span class="icon is-small">
+                    <i class="fas fa-map-marked-alt"></i>
+                </span>
+            </button> --}}
+            <a class="button is-circular is-large ml-2 mr-2" href="https://github.com/hiyamashu/Metronami"
+                target="_blank">
+                <span class="icon is-small">
+                    <i class="fab fa-github-alt"></i>
+                </span>
+            </a>
+            {{!-- <button class="button is-circular is-large ml-2 mr-2" href="/settings">
+                <span class="icon is-small">
+                    <i class="fas fa-cog"></i>
+                </span>
+            </button> --}}
+            <button class="button is-circular is-large ml-2 mr-2" onclick="$('#modal-ShutDown').fadeIn('fast')">
+                <span class="icon is-small">
+                    <i class="fas fa-power-off"></i>
+                </span>
+            </button>
+        </span>
     </div>
 </section>
+
+<div class="modal is-active" id="modal-ShutDown" style="display: none">
+    <div class="modal-background" onclick="$('#modal-ShutDown').fadeOut('fast')"></div>
+    <div class="modal-content">
+        <div class="box p-6">
+            <div class="block">
+                <h1 class="title is-3">See you soon!</h1>
+                <p class="subtitle">Metronami will now close and shut down.</p>
+                <p>You may run <code class="has-text-grey">start-metronami</code> to start up again.</p>
+            </div>
+            <form method="POST" action="/shutdown">
+                <button class="button is-black has-text-danger" value="SHUTDOWN" name="doAction"><i
+                        class="fas fa-power-off"></i>&ensp;Shut down</button>
+            </form>
+        </div>
+    </div>
+    <button class="modal-close is-large" aria-label="close" onclick="$('#modal-ShutDown').fadeOut('fast')"></button>
+</div>
+
+
+<div class="modal is-active" id="modal-CreateNetwork" style="display: none;">
+    <div class="modal-background" onclick="$('#modal-CreateNetwork').fadeOut('fast')"></div>
+    <div class="modal-content">
+        <div class="box p-6">
+            <h1 class="title is-3">Create Network</h1>
+            <form method="POST" autocomplete="off" action="/manage/add_network">
+                <div class="field">
+                    <label class="label">Name</label>
+                    <div class="control">
+                        <input class="input" type="text" name="name" placeholder="Nakato Metro" required>
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Alternative Name (optional)</label>
+                    <div class="control">
+                        <input class="input" type="text" name="altName" placeholder="ナカト地下鉄">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Description (optional)</label>
+                    <div class="control">
+                        <textarea class="textarea" name="desc" rows="5"
+                            placeholder="Nakato Metro is a subway network that..."></textarea>
+                    </div>
+                </div>
+                <button class="button is-dark"><i class="fas fa-arrow-right"></i>&ensp;Continue</button>
+            </form>
+        </div>
+    </div>
+    <button class="modal-close is-large" aria-label="close"
+        onclick="$('#modal-CreateNetwork').fadeOut('fast')"></button>
+</div>
+
+
+{{!-- <div class="field is-grouped is-grouped-multiline">
+    <div class="control mb-2 mr-1">
+        <span class="tag" style="background-color: teal; color: white">
+            Akenomachi Line
+        </span>
+    </div>
+    <div class="control mb-2 mr-1">
+        <span class="tag" style="background-color:darkred; color: white">
+            Kyowada Line
+        </span>
+    </div>
+</div> --}}

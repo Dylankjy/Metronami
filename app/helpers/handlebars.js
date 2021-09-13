@@ -29,6 +29,9 @@ module.exports = {
 
         return html
     },
+    lengthOfList: (list) => {
+        return list.length
+    },
     parseISODateTime: (value) => {
         return dateFormat(value, 'dS mmmm yyyy, HH:MM:ss')
     },
