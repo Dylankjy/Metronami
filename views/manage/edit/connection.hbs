@@ -37,7 +37,9 @@
                                 <a
                                     href="/manage/network/{{@root.data.currentNetwork.id}}/stations/{{this.id}}">{{this.name}}</a>
                             </h2>
+                            {{#if this.alt_name}}
                             <p class="subtitle is-6">{{this.alt_name}}</p>
+                            {{/if}}
                         </div>
                         <div class="column has-text-right is-one-fifth">
                             <button value="{{this.id}}" type="submit" name="removeAction"
