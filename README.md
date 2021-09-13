@@ -7,7 +7,7 @@ An open source Public Transport network manager for roleplay and fantasy worlds
 - Python (3 or higher; Select **'Add to PATH'** during install) - [Download](https://www.python.org/downloads/)
 - NodeJS (LTS) - [Download](https://nodejs.org/en/)
 
-**Step 2:** Get the latest Metronami release [here](https://github.com/hiyamashu/Metronami/releases). Only select pre-release versions if you want to participate in early-release testing.
+**Step 2:** Get the latest Metronami release [here](https://github.com/hiyamashu/Metronami/releases). Only select pre-release versions if you want to participate in early-release testing. Download links can be found under assets, `Source code (zip)`.
 
 **Step 3:** Open `start-metronami.cmd` (For Windows) or `start-metronami.sh` (For macOS & Linux) to start Metronami. To close the application, close the window or do `Ctrl+C` in the terminal window to terminate.
 
