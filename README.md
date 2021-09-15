@@ -6,11 +6,11 @@ An open source Public Transport network manager for roleplay and fantasy worlds
 - NodeJS (LTS) - [Download](https://nodejs.org/en/)
   - Leave all settings to default
   - Right after 'Custom Setup', 'Tools for Natives Modules' screen will be shown. Make sure you check the box for 'Automatically install the neccessary tools. Note that this will also install Chocolatey.'
+- Python (3 or higher; Select **'Add to PATH'** during install) - [Download](https://www.python.org/downloads/)
 
 **Step 1.1 (Only do this if you encounter problems in Step 3):**
 Chocolatey would have already done this step automatically for you. Only do this if you encounter a missing dependency error when trying to start Metronami in step 3.
-- Python (3 or higher; Select **'Add to PATH'** during install) - [Download](https://www.python.org/downloads/)
-- Visual Studio Build Tools 2017
+- Install Visual Studio Build Tools 2017 manually
   - You must have NodeJS installed first
   - Open a terminal window (for windows, search Powershell; Open it with Administrator) and type `choco install visualstudio2017buildtools`. Press enter and wait for installation to be completed.
 
