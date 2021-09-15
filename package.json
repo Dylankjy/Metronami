@@ -4,6 +4,7 @@
   "description": "An open source Public Transport network manager for roleplay and fantasy worlds",
   "main": "app.js",
   "scripts": {
+    "prestart": "npm i",
     "start": "node app.js",
     "test": "eslint . --ext .js,.jsx,.ts,.tsx",
     "lint-fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix",

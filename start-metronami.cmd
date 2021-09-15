@@ -1,5 +1,5 @@
 @echo off
-npm install && npm start
+npm start
 
 pause
 exit
