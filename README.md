@@ -1,4 +1,7 @@
 # 🚇🌊 Metronami
+[![CodeQL](https://github.com/hiyamashu/Metronami/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/hiyamashu/Metronami/actions/workflows/codeql-analysis.yml)
+[![ESLint](https://github.com/hiyamashu/Metronami/actions/workflows/eslint.yml/badge.svg)](https://github.com/hiyamashu/Metronami/actions/workflows/eslint.yml)
+
 An open source Public Transport network manager for roleplay and fantasy worlds
  
 ## Installation
