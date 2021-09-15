@@ -1,0 +1,19 @@
+name: ESLint
+
+on:
+  push:
+    branches: [ develop ]
+  pull_request:
+    # The branches below must be a subset of the branches above
+    branches: [ develop ]
+
+jobs:
+  eslint:
+    name: "Validate code using ESLint"
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install modules
+      run: npm ci
+    - name: Run ESLint
+      run: npx eslint . --ext .js,.jsx,.ts,.tsx
