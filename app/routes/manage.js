@@ -75,7 +75,7 @@ router.get('/network/:networkID/lines', async (req, res) => {
         raw: true,
     })
 
-    const Lines = await Line.findAll({ where: { network_id: networkID }, raw: true })
+    const Lines = await Line.findAll({ where: { network_id: networkID }, order: ['name'], raw: true })
 
     const data = {
         title: 'Manage Lines for ' + CurrentNetwork.name,
@@ -190,7 +190,7 @@ router.get('/network/:networkID/stations', async (req, res) => {
     })
 
     const Lines = await Line.findAll({ where: { network_id: networkID }, raw: true })
-    const Stations = await Station.findAll({ where: { network_id: networkID }, include: [{ model: Line, attributes: ['color'] }, { model: Connection }], raw: true })
+    const Stations = await Station.findAll({ where: { network_id: networkID }, include: [{ model: Line, attributes: ['color'] }, { model: Connection }], order: [['createdAt', 'ASC'], ['station_code', 'ASC']], raw: true })
 
     const data = {
         title: 'Manage Lines for ' + CurrentNetwork.name,
