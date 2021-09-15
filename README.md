@@ -21,5 +21,5 @@ Chocolatey would have already done this step automatically for you. Only do this
 
 **Step 3:** Open `start-metronami.cmd` (For Windows) or `start-metronami.sh` (For macOS & Linux) to start Metronami. To close the application, close the window or do `Ctrl+C` in the terminal window to terminate.
 
-# Legal
+## Legal
 Metronami is licensed under the GPL-3.0 license. A copy may be found in `LICENSE` file for your reference.
