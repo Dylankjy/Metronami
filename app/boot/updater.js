@@ -8,7 +8,10 @@ const chalk = require('chalk')
 const updater = () => {
     return new Promise((resolve) => {
         getTagFor('hiyamashu', 'Metronami', '').then((tag) => {
-            if (semver.satisfies(currentVersion, `>=${tag}`) === true) {
+            const tagCleaned = semver.clean(tag)
+            console.table([currentVersion, tagCleaned])
+            if (semver.lt(currentVersion, tagCleaned) === false) {
+                console.log(chalk.white('You are running the latest version of Metronami.'))
                 return resolve()
             }
 
@@ -23,7 +26,7 @@ const updater = () => {
                     console.log(chalk.whiteBright('Update downloaded into /updates. Please update Metronami at your nearest convenience.'))
                 })
 
-            resolve()
+            return resolve()
         })
     })
 }
