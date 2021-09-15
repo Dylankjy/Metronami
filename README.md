@@ -4,6 +4,7 @@ An open source Public Transport network manager for roleplay and fantasy worlds
 ## Installation
 **Step 1:** Required dependencies to install:
 - Visual Studio Build Tools 2017 (Select **Visual C++ Build tools** and uncheck everything else) - [Download](https://visualstudio.microsoft.com/downloads)
+   - Options can be found after downloading and running the Visual Studio Community Installer.
 - Python (3 or higher; Select **'Add to PATH'** during install) - [Download](https://www.python.org/downloads/)
 - NodeJS (LTS) - [Download](https://nodejs.org/en/)
 
