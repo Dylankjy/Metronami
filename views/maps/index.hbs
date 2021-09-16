@@ -1,0 +1,76 @@
+<section class="hero is-light">
+    <div class="hero-body">
+        <div class="container">
+            <a href="/"><small><i class="fa fa-arrow-left"></i>&ensp;Back</small></a>
+            <p class="title is-2 mt-6 has-text-warning-dark">
+                Map Generator
+            </p>
+            <p class="subtitle is-5">
+                Generate a transit map from your saved networks.
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="columns is-vcentered">
+            <div class="column">
+                <h2 class="title is-4">Your maps</h2>
+                <p class="subtitle is-6">List of maps stored on this instance of Metronami</p>
+            </div>
+            <div class="column has-text-right">
+                <a class="button is-success" onclick="$('#modal-CreateMap').fadeIn('fast')"><i
+                        class="fas fa-plus"></i>&ensp;New Map</a>
+            </div>
+        </div>
+        <div class="columns">
+            {{#if data.maps}}
+            {{#each data.maps}}
+            <div class="column">
+                <a class="list-item p-5 mr-3 has-background-white" href="/maps/edit/{{this.id}}">
+                    <h4 class="title is-5 text-NoOverflow">{{this.name}}</h4>
+                </a>
+            </div>
+            {{/each}}
+            {{else}}
+            <div class="column has-text-centered">
+                <p class="title is-5">No maps to display</p>
+            </div>
+            {{/if}}
+        </div>
+    </div>
+</section>
+
+<div class="modal is-active" id="modal-CreateMap" style="display: none;">
+    <div class="modal-background" onclick="$('#modal-CreateMap').fadeOut('fast')"></div>
+    <div class="modal-content">
+        <div class="box p-6">
+            <h1 class="title is-3">Create Network</h1>
+            <form method="POST" autocomplete="off">
+                <div class="field">
+                    <label class="label">Name</label>
+                    <div class="control">
+                        <input class="input" type="text" name="name" placeholder="Central Line Map" required>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="label">Network to map</div>
+                    <div class="control">
+                        <div class="select">
+                            <select name="networkToMap" required>
+                                {{#each data.networks}}
+                                <option value="{{this.id}}">{{this.name}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                        <br>
+                        <small>This option cannot be changed after proceeding.</small>
+                    </div>
+                </div>
+                <button class="button is-black"><i class="fas fa-arrow-right"></i>&ensp;Continue</button>
+            </form>
+        </div>
+    </div>
+    <button class="modal-close is-large" aria-label="close" onclick="$('#modal-CreateMap').fadeOut('fast')"></button>
+</div>

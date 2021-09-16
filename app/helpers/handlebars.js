@@ -41,4 +41,16 @@ module.exports = {
     parseISOTimeOnly: (value) => {
         return dateFormat(value, 'HH:MM')
     },
+    ifIncludes(list, value, options) {
+        // Convert to array if not already
+        if (!Array.isArray(list)) {
+            list = list.split(',')
+        }
+
+        if (list.includes(value)) {
+            return options.fn(this)
+        } else {
+            return options.inverse(this)
+        }
+    },
 }

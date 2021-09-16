@@ -1,0 +1,70 @@
+<section class="section has-background-black">
+    <div class="container">
+        <div class="columns is-vcentered">
+            <div class="column is-four-fifths">
+                <small class="has-text-grey-light">Editing map:</small>
+                <h1 class="title has-text-white">{{data.currentMap.name}}</h1>
+                <p class="subtitle is-6 has-text-grey"><i class="fas fa-history"></i>&ensp;Last updated {{parseISODateTime data.currentMap.updatedAt}}</p>
+            </div>
+            <div class="column">
+                <span class="buttons is-right">
+                    <!-- TODO: About modal -->
+                    {{!-- <a class="button is-dark" href="/maps"><i class="fas fa-info-circle"></i>&ensp;About</a> --}}
+                    <a class="button is-dark is-danger" href="/maps"><i class="fas fa-times"></i>&ensp;Close map</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="section has-background-light">
+    <div class="container">
+        <h2 class="title is-5">Lines on the {{data.mapNetwork.dataValues.name}} network</h2>
+        <p class="subtitle is-6">Select lines to display on map</p>
+        <form method="POST">
+            <div class="columns">
+                {{#each data.mapNetwork.dataValues.Lines}}
+                <div class="column is-one-fifth">
+                    <label class="checkbox">
+                        <input type="checkbox" name="linesToDisplay" value="{{this.dataValues.id}}" {{#ifIncludes @root.data.currentMap.lines_to_show this.dataValues.id}}checked{{/ifIncludes}}>
+                        {{this.dataValues.name}}
+                    </label>
+                </div>
+                {{/each}}
+            </div>
+            <button class="button"><i class="fas fa-pencil-alt"></i>&ensp;Load map</button>
+        </form>
+    </div>
+</section>
+
+{{!-- This section displays the generated map --}}
+{{#if data.selectedLines }}
+{{#each data.selectedLines as |line|}}
+<section class="section has-background-white">
+    <div class="container">
+        <div style="display: inline-block;">
+            {{#each this.dataValues.Stations as |station|}}
+            <div class="line-section">
+                {{#unless @last}}
+                <div class="line" style="background-color: {{line.dataValues.color}};"></div>
+                {{/unless}}
+                <div class="node"></div>
+                <p class="station-name">
+                    <span class="has-text-black">{{station.dataValues.name}}</span>
+                    {{#if station.dataValues.alt_name}}
+                    <br>
+                    <small class="has-text-grey">{{station.dataValues.alt_name}}</small>
+                    {{/if}}
+                </p>
+            </div>
+            {{/each}}
+        </div>
+    </div>
+</section>
+{{/each}}
+{{else}}
+<section class="section has-background-white">
+    <div class="container has-text-centered">
+        <p class="title is-5">No lines selected</p>
+    </div>
+</section>
+{{/if}}

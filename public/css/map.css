@@ -1,0 +1,33 @@
+.node {
+    height: 1.5rem;
+    width: 1.5rem;
+    border-radius: 50%;
+    background-color: #fff;
+    border: 4px #000 solid;
+    margin-top: -1.25rem;
+}
+
+.line {
+    height: 1rem;
+    width: 5.25rem;
+    margin-right: -.8rem;
+    /* z-index: 1 */
+    border-radius: 6rem;
+}
+
+.line-section {
+    display: inline-block;
+    min-height: min-content;
+    height: 12rem;
+}
+
+.station-name {
+    font-weight: 600;
+    /* rotate: y 45deg; */
+    transform: rotate(45deg) translate(1rem, -1rem);
+    transform-origin: 0 0;
+    width: 0;
+    height: auto;
+    white-space: nowrap;
+    line-height: 1rem;
+}

@@ -24,6 +24,7 @@
             </div>
         </div>
         <div class="list-Networks">
+            {{#if data.networks}}
             {{#each data.networks}}
             <a class="list-item p-5 mr-3 has-background-black" href="/manage/network/{{this.dataValues.id}}">
                 <h4 class="title is-5 has-text-white text-NoOverflow">{{this.dataValues.name}}</h4>
@@ -43,6 +44,11 @@
                 </div>
             </a>
             {{/each}}
+            {{else}}
+            <div class="has-text-centered">
+            <p class="has-text-grey">No network available</p>
+            </div>
+            {{/if}}
         </div>
     </div>
 </section>
@@ -50,11 +56,11 @@
     <div class="container">
         <hr>
         <span class="buttons is-centered">
-            <button class="button is-circular is-large ml-2 mr-2">
+            <a class="button is-circular is-large ml-2 mr-2" href="/maps">
                 <span class="icon is-small">
                     <i class="fas fa-map-marked-alt"></i>
                 </span>
-            </button>
+            </a>
             <a class="button is-circular is-large ml-2 mr-2" href="https://github.com/hiyamashu/Metronami"
                 target="_blank">
                 <span class="icon is-small">
