@@ -1,11 +1,11 @@
 {
   "name": "metronami",
-  "version": "0.0.4-beta",
+  "version": "0.1.0-beta",
   "description": "An open source Public Transport network manager for roleplay and fantasy worlds",
   "main": "app.js",
   "scripts": {
     "prestart": "npm i",
-    "start": "node app.js",
+    "start": "node loader.js",
     "test": "eslint . --ext .js,.jsx,.ts,.tsx",
     "lint-fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
     "build": "pkg .",
@@ -31,6 +31,7 @@
     "cookie-parser": "^1.4.5",
     "dateformat": "^4.5.1",
     "download": "^8.0.0",
+    "execa": "^5.1.1",
     "express": "^4.17.1",
     "express-formidable": "^1.2.0",
     "express-handlebars": "^5.3.3",
