@@ -7,7 +7,7 @@
 }
 
 .modal-background {
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: rgba(0, 0, 0, 0.5);
     backdrop-filter: saturate(180%) blur(20px);
 }
 
@@ -41,4 +41,32 @@
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
+}
+
+.modal-content {
+    animation: modalPopIn 0.2s ease-out;
+}
+
+.modal-background {
+    animation: modalFadeIn 0.5s ease;
+}
+
+@keyframes modalPopIn {
+    from {
+        opacity: 0;
+        transform: scale(0.85);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
