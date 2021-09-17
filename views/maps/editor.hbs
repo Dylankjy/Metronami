@@ -4,12 +4,13 @@
             <div class="column is-four-fifths">
                 <small class="has-text-grey-light">Editing map:</small>
                 <h1 class="title has-text-white">{{data.currentMap.name}}</h1>
-                <p class="subtitle is-6 has-text-grey"><i class="fas fa-history"></i>&ensp;Last updated {{parseISODateTime data.currentMap.updatedAt}}</p>
+                <p class="subtitle is-6 has-text-grey"><i class="fas fa-history"></i>&ensp;Last updated
+                    {{parseISODateTime data.currentMap.updatedAt}}</p>
             </div>
             <div class="column">
                 <span class="buttons is-right">
-                    <!-- TODO: About modal -->
-                    {{!-- <a class="button is-dark" href="/maps"><i class="fas fa-info-circle"></i>&ensp;About</a> --}}
+                    <a class="button is-dark" onclick="$('#modal-MapInfo').fadeIn('fast')"><i
+                            class="fas fa-info-circle"></i>&ensp;About</a>
                     <a class="button is-dark is-danger" href="/maps"><i class="fas fa-times"></i>&ensp;Close map</a>
                 </span>
             </div>
@@ -25,7 +26,8 @@
                 {{#each data.mapNetwork.dataValues.Lines}}
                 <div class="column is-one-fifth">
                     <label class="checkbox">
-                        <input type="checkbox" name="linesToDisplay" value="{{this.dataValues.id}}" {{#ifIncludes @root.data.currentMap.lines_to_show this.dataValues.id}}checked{{/ifIncludes}}>
+                        <input type="checkbox" name="linesToDisplay" value="{{this.dataValues.id}}" {{#ifIncludes
+                            @root.data.currentMap.lines_to_show this.dataValues.id}}checked{{/ifIncludes}}>
                         {{this.dataValues.name}}
                     </label>
                 </div>
@@ -68,3 +70,44 @@
     </div>
 </section>
 {{/if}}
+
+<div class="modal is-active" id="modal-MapInfo" style="display: none;">
+    <div class="modal-background" onclick="$('#modal-MapInfo').fadeOut('fast')"></div>
+    <div class="modal-content">
+        <div class="box p-6">
+            <h1 class="title is-3">Map Info</h1>
+            <form method="POST" autocomplete="off" action="/maps/{{data.currentMap.id}}/edit_options">
+                <div class="field">
+                    <label class="label">Map Name</label>
+                    <div class="control">
+                        <input class="input" type="text" name="name" placeholder="{{data.currentMap.name}}"
+                            value="{{data.currentMap.name}}" required>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="label">Network to map</div>
+                    <div class="control">
+                        <input class="input" value="{{data.mapNetwork.dataValues.name}}" readonly disabled>
+                        <br>
+                        <small>This option cannot be changed.</small>
+                    </div>
+                </div>
+                <button class="button is-black"><i class="fas fa-save"></i>&ensp;Save changes</button>
+            </form>
+            <hr>
+            <div class="block">
+                <h3 class="title has-text-danger-dark is-4">Danger Zone</h3>
+                <p>Deleting a map is an irreversible action. Only proceed if you really want to.</p>
+            </div>
+            <form method="POST" autocomplete="off" action="/maps/{{data.currentMap.id}}/edit_options">
+                <div class="field">
+                    <div class="control">
+                        <a onclick="$(this).hide(); $('#button-Delete').show()" class="button is-danger is-light"><i class="fas fa-trash-alt"></i>&ensp;Delete map</a>
+                        <button id="button-Delete" class="button is-danger" name="doAction" value="DELETE" style="display: none;"><i class="fas fa-trash-alt"></i>&ensp;Confirm deletion?</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <button class="modal-close is-large" aria-label="close" onclick="$('#modal-MapInfo').fadeOut('fast')"></button>
+</div>

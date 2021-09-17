@@ -8,11 +8,13 @@ const { NotificationCookie, FormRestoreCookie } = require('../helpers/cookie_opt
 const { Op } = require('sequelize')
 
 router.get('/', async (req, res) => {
+    // Get list of all networks
     const networks = await Network.findAll({
         attributes: ['id', 'name'],
         raw: true,
     })
 
+    // Get list of all maps
     const maps = await Map.findAll({
         attributes: ['id', 'name'],
         raw: true,
@@ -23,6 +25,7 @@ router.get('/', async (req, res) => {
             networks,
             maps,
         },
+        notification: req.cookies.notification || false,
     }
     return res.render('maps/index', data)
 })
@@ -30,6 +33,7 @@ router.get('/', async (req, res) => {
 router.post('/', async (req, res) => {
     const { name, networkToMap } = req.body
 
+    // Create new map
     await Map.create({
         id: uuid.v4(),
         name: name,
@@ -43,11 +47,13 @@ router.post('/', async (req, res) => {
 router.get('/edit/:mapID', async (req, res) => {
     const { mapID } = req.params
 
+    // Get current map
     const currentMap = await Map.findOne({
         where: { id: mapID },
         raw: true,
     })
 
+    // Get current map's network
     const mapNetwork = await Network.findOne({
         where: {
             id: currentMap.network_id,
@@ -109,8 +115,37 @@ router.post('/edit/:mapID', async (req, res) => {
         }
     }
 
+    // Update map to store linesToDisplay
     await Map.update({
         lines_to_show: linesToDisplayArray.toString(),
+    }, {
+        where: {
+            id: mapID,
+        },
+    })
+
+    return res.redirect('back')
+})
+
+router.post('/:mapID/edit_options', async (req, res) => {
+    const { mapID } = req.params
+    const { name, doAction } = req.body
+
+    // Check whether is request is to delete map
+    if (doAction === 'DELETE') {
+        await Map.destroy({
+            where: {
+                id: mapID,
+            },
+        })
+
+        res.cookie('notification', `${name} has been deleted.`, NotificationCookie)
+        return res.redirect('/maps')
+    }
+
+    // If not, update map with new values provided
+    await Map.update({
+        name: name,
     }, {
         where: {
             id: mapID,
