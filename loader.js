@@ -19,7 +19,7 @@ const fs = require('fs');
             // Update mode
             if (exitData.exitCode === 2) {
                 console.log('[LOADER] Update operation in progress')
-                const tag = getUpdateInfo()
+                const tag = await getUpdateInfo()
 
                 // Delete operation
                 fs.rmdirSync('./app', { recursive: true })
@@ -29,7 +29,7 @@ const fs = require('fs');
                 fs.rmdirSync('./views', { recursive: true })
 
                 // Unpack Update package
-                extract(`./updates/Metronami-${tag}.zip`, { dir: './' })
+                await extract(`./updates/Metronami-${tag}.zip`, { dir: './' })
                 continue
             }
 
