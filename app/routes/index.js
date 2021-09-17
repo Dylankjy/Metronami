@@ -12,6 +12,7 @@ router.get('/', async (req, res) => {
         data: {
             networks: networks,
         },
+        notification: req.cookies.notification || false,
     }
     return res.render('index', data)
 })
