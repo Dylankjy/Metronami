@@ -1,6 +1,6 @@
 {
   "name": "metronami",
-  "version": "0.0.3-beta",
+  "version": "0.0.4-beta",
   "description": "An open source Public Transport network manager for roleplay and fantasy worlds",
   "main": "app.js",
   "scripts": {
