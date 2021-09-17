@@ -35,7 +35,7 @@ const getUpdateInfo = () => {
         // Check for updates
         getTagFor('hiyamashu', 'Metronami', '').then((tag) => {
             const tagCleaned = semver.clean(tag)
-            if (semver.lt(version, tagCleaned) === false) {
+            if (semver.lt(currentVersion, tagCleaned) === false) {
                 return resolve(false)
             }
 
