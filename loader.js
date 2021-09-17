@@ -24,7 +24,6 @@ const fs = require('fs');
                 // Delete operation
                 fs.rmdirSync('./app', { recursive: true })
                 fs.rmdirSync('./public', { recursive: true })
-                fs.rmdirSync('./node_modules', { recursive: true })
                 fs.rmdirSync('./third_party', { recursive: true })
                 fs.rmdirSync('./views', { recursive: true })
 
