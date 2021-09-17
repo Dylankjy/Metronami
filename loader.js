@@ -28,7 +28,7 @@ const fs = require('fs');
                 fs.rmdirSync('./views', { recursive: true })
 
                 // Unpack Update package
-                await extract(`./updates/Metronami-${tag}.zip`, { dir: __dirname })
+                await extract(`./updates/Metronami-${tag.substring(1)}.zip`, { dir: __dirname })
                 continue
             }
 
