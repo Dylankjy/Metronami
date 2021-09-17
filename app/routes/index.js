@@ -19,7 +19,7 @@ router.get('/', async (req, res) => {
 
 router.post('/shutdown', (req, res) => {
     res.render('shutdown')
-    console.log(chalk.greenBright('Metronami has shut down. It is now safe to close this window.'))
+    console.log(chalk.greenBright('Metronami has shut down. You may now safely close this window.'))
     setTimeout(() => {
         return process.exit()
     }, 3000)
