@@ -1,4 +1,4 @@
-const updater = require('./updater')
+const { updater } = require('./updater')
 
 const chalk = require('chalk')
 const packageInfo = require('../../package.json')

@@ -51,6 +51,25 @@
     animation: modalFadeIn 0.5s ease;
 }
 
+#versionArrow {
+    animation: toRight 2s ease infinite;
+}
+
+@keyframes toRight {
+    0% {
+        opacity: 0;
+        transform: translateX(-8rem);
+    }
+    50% {
+        opacity: 1;
+        transform: translateX(0rem);
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(8rem);
+    }
+}
+
 @keyframes modalPopIn {
     from {
         opacity: 0;

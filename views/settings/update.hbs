@@ -1,0 +1,103 @@
+<section class="block">
+    <h2 class="title">Software Updates</h2>
+    <div class="content">
+        <b>Software Version:</b>
+        <ul>
+            <li>v{{data.version}}</li>
+            {{#if data.earlyRelease}}
+            <li class="has-text-danger-dark"><i class="fas fa-exclamation-triangle"></i>&ensp;Early release branch</li>
+            {{/if}}
+        </ul>
+        {{#unless data.updateInfo}}
+        <p><i class="fas fa-check-circle"></i>&ensp;You are running the latest version of Metronami</p>
+        {{else}}
+        <hr>
+        <div class="box has-text-centered">
+            <p class="mb-3"><i class="fas fa-exclamation-circle"></i>&ensp;A new version of Metronami is available</p>
+            <div class="columns has-text-centered is-vcentered">
+                <div class="column">
+                    <small>Installed Version</small>
+                    <p class="title">{{data.version}}</p>
+                </div>
+                <div class="column is-one-fifth">
+                    <p id="versionArrow" class="is-size-2 has-text-grey"><i class="fas fa-arrow-right"></i></p>
+                </div>
+                <div class="column">
+                    <small>New Version</small>
+                    <p class="title has-text-success-dark">{{data.updateInfo}}</p>
+                </div>
+            </div>
+        </div>
+        <p>Changelog for {{data.updateInfo}} can be found <a
+                href="https://github.com/hiyamashu/Metronami/releases/tag/{{data.updateInfo}}">here</a>.</p>
+        <a onclick="$('#modal-UpdateSystem').fadeIn('fast')" class="button is-black has-text-danger"><i
+                class="fas fa-sync"></i>&ensp;Update &amp; restart</a>
+        {{/unless}}
+    </div>
+</section>
+
+<div class="modal is-active" id="modal-UpdateSystem" style="display: none">
+    <div class="modal-background"></div>
+    <div class="modal-content">
+        <div class="box p-6">
+            <div class="block">
+                <h1 class="title is-3">Update Metronami</h1>
+                <p class="subtitle">Metronami will now update from {{data.version}} to {{data.updateInfo}} and restart.
+                </p>
+            </div>
+            <form method="POST">
+                <span class="buttons">
+                    <a onclick="$('#modal-UpdateSystem').fadeOut('fast')" class="button is-light is-fullwidth"><i
+                            class="fas fa-times"></i>&ensp;Back</a>
+                    <button class="button is-black has-text-danger is-fullwidth" value="UPDATE" name="doAction"><i
+                            class="fas fa-sync"></i>&ensp;Update &amp; restart</button>
+                </span>
+            </form>
+        </div>
+    </div>
+</div>
+
+{{#if data.showUpdatingModal}}
+<div class="modal is-active" id="modal-UpdateSystemLoad">
+    <div class="modal-background"></div>
+    <div class="modal-content">
+        <div class="box p-6">
+            <div class="columns is-vcentered">
+                <div class="column">
+                    <h1 class="title is-3">Updating Metronami</h1>
+                    <p class="subtitle">Please wait...</p>
+                    <p><i class="fas fa-exclamation-triangle"></i>&ensp;Do not refresh the page while Metronami is updating.</p>
+                </div>
+                <div class="column is-one-fifth has-text-right">
+                    <p class="is-size-2 has-text-dark"><i class="fas fa-spinner fa-pulse"></i></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal is-active" id="modal-UpdateSystemDone" style="display: none">
+    <div class="modal-background"></div>
+    <div class="modal-content">
+        <div class="box p-6">
+            <h1 class="title is-3">Update complete</h1>
+            <p class="subtitle">Metronami has been updated to the latest version.</p>
+            <a class="button is-light is-fullwidth" href="/"><i class="fa fa-arrow-right"></i>&ensp;Start</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Ping the server to check if the system is initialising
+    let pingStatus = setInterval(() => {
+        $.get('/', function (data) {
+            if (data) {
+                pingStatus = clearInterval(pingStatus);
+                $('#modal-UpdateSystemLoad').fadeOut('fast', function () {
+                    $('#modal-UpdateSystemDone').fadeIn('fast');
+                });
+            }
+        })
+    }, 5000)
+</script>
+{{/if}}

@@ -22,7 +22,7 @@ const updater = () => {
 
             download(file, filePath)
                 .then(() => {
-                    console.log(chalk.whiteBright('Update downloaded into /updates. Please update Metronami at your nearest convenience.'))
+                    console.log(chalk.whiteBright('Update has been downloaded. You can access Metronami Settings to perform automatic system update.'))
                 })
 
             return resolve()
@@ -30,4 +30,21 @@ const updater = () => {
     })
 }
 
-module.exports = updater
+const getUpdateInfo = () => {
+    return new Promise((resolve) => {
+        // Check for updates
+        getTagFor('hiyamashu', 'Metronami', '').then((tag) => {
+            const tagCleaned = semver.clean(tag)
+            if (semver.lt(version, tagCleaned) === false) {
+                return resolve(false)
+            }
+
+            return resolve(tag)
+        })
+    })
+}
+
+module.exports = {
+    updater,
+    getUpdateInfo,
+}

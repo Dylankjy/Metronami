@@ -1,0 +1,93 @@
+<section class="block">
+    <h3 class="title">Localisation</h3>
+    <form>
+        <div class="field">
+            <label class="label">Display Language</label>
+            <div class="control">
+                <input class="input" type="text" name="language" value="English" disabled>
+            </div>
+            <small>Metronami currently only offers the English language</small>
+        </div>
+    </form>
+</section>
+<hr>
+<section class="block">
+    <h3 class="title">Reset</h3>
+    <p class="subtitle">Revert Metronami back to factory defaults</p>
+    <p>You can try initialising Metronami back to default settings if the application is not working correctly, or if
+        you wish to start from a clean slate.
+        <br>
+        <b class="has-text-danger-dark"><i class="fas fa-exclamation-triangle"></i>&ensp;All user data stored will be
+            irreversibly erased if you proceed.</b>
+    </p>
+    <br>
+    <a onclick="$('#modal-InitialiseSystem').fadeIn('fast')" class="button is-black has-text-danger" type="submit"
+        name="reset"><i class="fas fa-power-off"></i>&ensp;Initialise Metronami</a>
+</section>
+
+<div class="modal is-active" id="modal-InitialiseSystem" style="display: none">
+    <div class="modal-background"></div>
+    <div class="modal-content">
+        <div class="box p-6">
+            <div class="block">
+                <h1 class="title is-3 has-text-danger-dark">Initialise system</h1>
+                <p class="subtitle">Metronami will now delete all user data and initialise the system.</p>
+                <p>If you proceed, there is no going back.</p>
+            </div>
+            <form method="POST" action="/settings/system/init_system">
+                <span class="buttons">
+                    <a onclick="$('#modal-InitialiseSystem').fadeOut('fast')" class="button is-light is-fullwidth"
+                        value="SHUTDOWN" name="doAction"><i class="fas fa-times"></i>&ensp;Cancel</a>
+                    <button class="button is-black has-text-danger has-text-weight-bold is-fullwidth"
+                        value="INIT_RESTART" name="doAction"><i class="fas fa-power-off"></i>&ensp;Initialise and
+                        restart</button>
+                </span>
+            </form>
+        </div>
+    </div>
+</div>
+
+{{#if data.showInitialisingModal}}
+<div class="modal is-active" id="modal-InitialiseSystemLoad">
+    <div class="modal-background"></div>
+    <div class="modal-content">
+        <div class="box p-6">
+            <div class="columns is-vcentered">
+                <div class="column">
+                    <h1 class="title is-3">Initialising system</h1>
+                    <p class="subtitle">Please wait...</p>
+                    <p><i class="fas fa-exclamation-triangle"></i>&ensp;Do not refresh the page while Metronami is initialising.</p>
+                </div>
+                <div class="column is-one-fifth has-text-right">
+                    <p class="is-size-2 has-text-dark"><i class="fas fa-spinner fa-pulse"></i></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal is-active" id="modal-InitialiseSystemDone" style="display: none">
+    <div class="modal-background"></div>
+    <div class="modal-content">
+        <div class="box p-6">
+            <h1 class="title is-3">Initialisation complete</h1>
+            <p class="subtitle">Metronami has been reverted to factory defaults</p>
+            <a class="button is-light is-fullwidth" href="/"><i class="fa fa-arrow-right"></i>&ensp;Start</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Ping the server to check if the system is initialising
+    let pingStatus = setInterval(() => {
+        $.get('/', function (data) {
+            if (data) {
+                pingStatus = clearInterval(pingStatus);
+                $('#modal-InitialiseSystemLoad').fadeOut('fast', function () {
+                    $('#modal-InitialiseSystemDone').fadeIn('fast');
+                });
+            }
+        })
+    }, 5000)
+</script>
+{{/if}}

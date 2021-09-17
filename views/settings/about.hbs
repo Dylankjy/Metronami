@@ -1,17 +1,11 @@
 <section class="block">
     <h2 class="title">Metronami</h2>
-    <p class="subtitle">Running v{{data.version}}</p>
+    {{#if data.earlyRelease}}
+    <p class="subtitle"><i class="fas fa-dove"></i>&ensp;Early Release</p>
+    {{else}}
+    <p class="subtitle"><i class="fas fa-book"></i>&ensp;Stable Release</p>
+    {{/if}}
     <p>メトロ波 - Metronami is a open source Public Transport network manager for roleplay and fantasy worlds</p>
-    <br>
-    <p class="has-text-weight-bold">Software version:</p>
-    <div class="content">
-        <ul>
-            <li>v{{data.version}}</li>
-            {{#if data.earlyRelease}}
-            <li class="has-text-danger-dark"><i class="fas fa-exclamation-triangle"></i>&ensp;Early release branch</li>
-            {{/if}}
-        </ul>
-    </div>
 </section>
 <hr>
 <section class="block">
