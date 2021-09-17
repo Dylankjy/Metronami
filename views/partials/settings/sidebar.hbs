@@ -1,0 +1,20 @@
+<aside data-turbolinks-permanent class="column is-2">
+    <nav data-turbolinks-permanent class="menu">
+        <p class="menu-label">
+            About
+        </p>
+        <ul class="menu-list">
+            <li><a href="/settings" {{#ifEquals nav "about" }}class="is-active" {{/ifEquals}}>
+                    <i class="fas fa-info-circle"></i>&ensp;About Metronami</a></li>
+        </ul>
+        <p class="menu-label">
+            Application Settings
+        </p>
+        <ul class="menu-list">
+            <li><a href="/settings/update" {{#ifEquals nav "update" }}class="is-active" {{/ifEquals}}>
+                    <i class="fas fa-sync"></i>&ensp;Software Update</a></li>
+            <li><a href="/settings/system" {{#ifEquals nav "system" }}class="is-active" {{/ifEquals}}>
+                    <i class="fas fa-cogs"></i>&ensp;System</a></li>
+        </ul>
+    </nav>
+</aside>
