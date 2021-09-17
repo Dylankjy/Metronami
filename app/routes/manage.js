@@ -47,8 +47,19 @@ router.get('/network/:networkID', async (req, res) => {
 })
 
 router.post('/network/:networkID', async (req, res) => {
-    const { name, altName, desc } = req.body
+    const { name, altName, desc, doAction } = req.body
     const { networkID } = req.params
+
+    if (doAction === 'DELETE') {
+        await Network.destroy({
+            where: {
+                id: networkID,
+            },
+        })
+
+        res.cookie('notification', `${name} has been deleted.`, NotificationCookie)
+        return res.redirect('/')
+    }
 
     await Network.update({
         name: name,

@@ -7,13 +7,15 @@
             <div class="field">
                 <label class="label">Name</label>
                 <div class="control">
-                    <input class="input" type="text" name="name" placeholder="{{data.currentNetwork.name}}" value="{{data.currentNetwork.name}}" required>
+                    <input class="input" type="text" name="name" placeholder="{{data.currentNetwork.name}}"
+                        value="{{data.currentNetwork.name}}" required>
                 </div>
             </div>
             <div class="field">
                 <label class="label">Alternative Name (optional)</label>
                 <div class="control">
-                    <input class="input" type="text" name="altName" placeholder="{{data.currentNetwork.alt_name}}" value="{{data.currentNetwork.alt_name}}">
+                    <input class="input" type="text" name="altName" placeholder="{{data.currentNetwork.alt_name}}"
+                        value="{{data.currentNetwork.alt_name}}">
                 </div>
             </div>
             <div class="field">
@@ -24,6 +26,21 @@
                 </div>
             </div>
             <button class="button is-black"><i class="fas fa-save"></i>&ensp;Save</button>
+            <hr>
+            <div class="block">
+                <h3 class="title is-5 has-text-danger-dark">Danger Zone</h3>
+                <p>Deleting a network deletes all lines &amp; stations associated with it.<br>This action is
+                    irreversible
+                    and irrecoverable, so please think twice before proceeding!</p>
+            </div>
+            <div class="field">
+                <div class="control">
+                    <a onclick="$(this).hide(); $('#button-Delete').show()" class="button is-danger is-light"><i
+                            class="fas fa-trash-alt"></i>&ensp;Delete map</a>
+                    <button id="button-Delete" class="button is-danger" name="doAction" value="DELETE"
+                        style="display: none;"><i class="fas fa-trash-alt"></i>&ensp;Confirm deletion?</button>
+                </div>
+            </div>
         </form>
     </div>
 </section>
