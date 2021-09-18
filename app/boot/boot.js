@@ -10,6 +10,9 @@ const boot = () => {
         if (packageInfo.version.includes('-beta') || packageInfo.version.includes('-alpha')) {
             console.log(chalk.red('This is a beta/alpha version of Metronami. Always keep a backup of your data. Report any bugs if you find any.'))
         }
+        setTimeout(() => {
+            resolve()
+        }, 5000)
     })
 }
 
