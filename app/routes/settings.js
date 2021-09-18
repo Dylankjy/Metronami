@@ -65,7 +65,7 @@ router.post('/update', async (req, res) => {
     res.render('settings/update', data)
 
     setTimeout(() => {
-        process.exit(2)
+        process.exit(-11)
     }, 2000)
 })
 
@@ -113,7 +113,7 @@ const initSystem = () => {
         fs.unlinkSync(dbPath)
 
         setTimeout(() => {
-            process.exit(1)
+            process.exit(-10)
         }, 2000)
     })
 }
