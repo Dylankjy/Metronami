@@ -32,12 +32,12 @@ require('./app/routes/routes')(app)
 const open = require('open')
 const chalk = require('chalk')
 
-const webserverPort = 3000
+const webserverPort = 36554
 
 const webserver = () => {
     app.listen(webserverPort, (err) => {
         if (err) {
-            console.log(`\x1b[1m\x1b[2m[WEBSERVER] - \x1b[0m\x1b[1m\x1b[31m\x1b[5mFAILED\x1b[0m\x1b[31m: Unable to bind to port 5000. Could there possibly be another instance alive?\x1b[0m`)
+            console.log(`\x1b[1m\x1b[2m[WEBSERVER] - \x1b[0m\x1b[1m\x1b[31m\x1b[5mFAILED\x1b[0m\x1b[31m: Unable to bind to port 36554. Could there possibly be another instance alive?\x1b[0m`)
             process.exit(1)
         }
     })
